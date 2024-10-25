@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Owner</title>
+</head>
+<body>
+    <h1>Contact Owner for <%= pet.name %></h1>
+    <form action="/api/v1/contact" method="POST">
+        <input type="hidden" name="pet" value="<%= pet._id %>">
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" required></textarea><br>
+        <button type="submit">Send Message</button>
+    </form>
+</body>
+</html>

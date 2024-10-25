@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Pets for Adoption</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <h1>Available Pets for Adoption</h1>
+    <ul>
+        <% if (pets.length > 0) { %>
+            <% pets.forEach(pet => { %>
+                <li>
+                    <a href="/pets/<%= pet._id %>">
+                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
+                        <h2><%= pet.name %> (Breed: <%= pet.breed %>)</h2>
+                        <p>Age: <%= pet.age %> years</p>
+                    </a>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li>No pets available for adoption.</li>
+        <% } %>
+    </ul>
+    <a href="/create-pet">Add a Pet for Adoption</a>
+</body>
+</html>
