@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Pets for Adoption</title>
-    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-    <h1>Available Pets for Adoption</h1>
+    <h1>Available Pets</h1>
     <ul>
-        <% if (pets.length > 0) { %>
+        <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
                 <li>
-                    <a href="/pets/<%= pet._id %>">
-                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
-                        <h2><%= pet.name %> (Breed: <%= pet.breed %>)</h2>
-                        <p>Age: <%= pet.age %> years</p>
-                    </a>
+                    <h2><%= pet.name %> (Breed: <%= pet.breed %>)</h2>
+                    <p>Age: <%= pet.age %></p>
+                    <p>Location: <%= pet.location %></p>
+                    <p>Price: <%= pet.price %></p>
+                    <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
+                    <a href="/pets/<%= pet._id %>">View Details</a>
                 </li>
             <% }); %>
         <% } else { %>
-            <li>No pets available for adoption.</li>
+            <p>No pets available for adoption.</p>
         <% } %>
     </ul>
-    <a href="/create-pet">Add a Pet for Adoption</a>
 </body>
 </html>

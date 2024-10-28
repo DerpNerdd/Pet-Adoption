@@ -8,6 +8,8 @@
 <body>
     <h1>Sign Up</h1>
     <form action="/api/v1/users/register" method="POST">
+        <input type="hidden" name="redirectTo" value="<%= redirectTo || '/' %>">
+
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
 
