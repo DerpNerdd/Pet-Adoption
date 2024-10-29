@@ -1,6 +1,7 @@
 const Pet = require('../models/pet');
 const asyncWrapper = require('../middleware/async');
-const authMiddleware = require('../middleware/authMiddleware');  
+const authMiddleware = require('../middleware/authMiddleware'); 
+const mongoose = require('mongoose'); 
 
 
 const getAllPets = asyncWrapper(async (req, res) => {
