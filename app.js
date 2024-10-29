@@ -9,7 +9,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const petRoutes = require('./routes/petRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/contactRoutes');
-const { getAllPets } = require('./controllers/petController');  // Import getAllPets for index route
+const { getAllPets } = require('./controllers/petController');
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
@@ -23,9 +23,8 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Main Routes
+// Routes
 app.get('/', getAllPets);  // Main landing page to display all pets
-
 app.use('/pets', petRoutes);  // Use petRoutes for individual pet pages
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/contact', contactRoutes);
@@ -45,13 +44,19 @@ app.get('/create-pet', authMiddleware, (req, res) => {
     res.render('create-pet');
 });
 
-app.get('/admin', authMiddleware, (req, res) => {
+app.get('/admin', authMiddleware, async (req, res) => {
     if (!req.user.admin) {
         return res.status(403).send('Access denied');
     }
-    const users = [];  // Placeholder for user data
-    const pets = [];   // Placeholder for pet data
-    res.render('admin', { users, pets });
+
+    try {
+        const users = await require('./models/users').find({ admin: false });
+        const pets = await require('./models/pet').find();
+        res.render('admin', { users, pets });
+    } catch (error) {
+        console.error("Error fetching data for admin page:", error);
+        res.status(500).send('Error loading admin data');
+    }
 });
 
 // Error Handling and 404

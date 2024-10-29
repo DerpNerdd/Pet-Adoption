@@ -1,63 +1,54 @@
 const Pet = require('../models/pet');
-const asyncWrapper = require('../middleware/async');
-const authMiddleware = require('../middleware/authMiddleware'); 
-const mongoose = require('mongoose'); 
 
+const getAllPets = async (req, res) => {
+    try {
+        const pets = await Pet.find();
+        res.render('index', { pets });
+    } catch (error) {
+        res.status(500).send('Error loading pets');
+    }
+};
 
-const getAllPets = asyncWrapper(async (req, res) => {
-    const pets = await Pet.find({});
-    res.render('index', { pets });  // Render the pet listing page
-});
+const createPet = async (req, res) => {
+    try {
+        const pet = new Pet(req.body);
+        await pet.save();
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).send('Error creating pet');
+    }
+};
 
-const renderCreatePetForm = [authMiddleware, asyncWrapper(async (req, res) => {
-    res.render('create-pet');  // Render the create pet form if authenticated
-})];
+const getPet = async (req, res) => {
+    try {
+        const pet = await Pet.findById(req.params.id);
+        if (!pet) return res.status(404).send('Pet not found');
+        res.render('pet-details', { pet });
+    } catch (error) {
+        res.status(500).send('Error loading pet details');
+    }
+};
 
+const updatePet = async (req, res) => {
+    try {
+        await Pet.findByIdAndUpdate(req.params.id, req.body);
+        res.redirect(`/pets/${req.params.id}`);
+    } catch (error) {
+        res.status(500).send('Error updating pet');
+    }
+};
 
-const createPet = [authMiddleware, asyncWrapper(async (req, res) => {
-    const petData = {
-        ...req.body,
-        owner: req.user.userId  // Use authenticated user's ID as the owner
-    };
-    const pet = await Pet.create(petData);
-    res.status(201).redirect('/');  // Redirect to homepage after creating the pet
-})];
-
-const getPet = asyncWrapper(async (req, res) => {
-    const petId = req.params.id;
-    console.log("Requested Pet ID:", petId);  // Log the requested ID for debugging
-
-    if (!mongoose.Types.ObjectId.isValid(petId)) {
-        return res.status(400).send('Invalid Pet ID');
+const deletePet = async (req, res) => {
+    if (!req.user.admin) {
+        return res.status(403).send('Access denied');
     }
 
-    const pet = await Pet.findById(petId);
-    if (!pet) {
-        return res.status(404).send('Pet not found');
+    try {
+        await Pet.findByIdAndDelete(req.params.id);
+        res.redirect('/admin');
+    } catch (error) {
+        res.status(500).send('Error deleting pet');
     }
-
-    console.log("Retrieved Pet Data:", pet);  // Log the retrieved pet data
-    res.render('pet-details', { pet });
-});
-
-
-
-const updatePet = asyncWrapper(async (req, res) => {
-    const { id: petID } = req.params;
-    const updatedPet = await Pet.findByIdAndUpdate(petID, req.body, { new: true, runValidators: true });
-    if (!updatedPet) {
-        return res.status(404).json({ message: 'Pet not found' });
-    }
-    res.status(200).json({ updatedPet });
-});
-
-const deletePet = asyncWrapper(async (req, res) => {
-    const { id: petID } = req.params;
-    const deletedPet = await Pet.findByIdAndDelete(petID);
-    if (!deletedPet) {
-        return res.status(404).json({ message: 'Pet not found' });
-    }
-    res.status(200).json({ message: 'Pet deleted successfully' });
-});
+};
 
 module.exports = { getAllPets, createPet, getPet, updatePet, deletePet };

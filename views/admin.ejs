@@ -8,31 +8,39 @@
 <body>
     <h1>Admin Dashboard</h1>
 
-    <h2>Manage Users</h2>
-    <ul>
-        <% users.forEach(user => { %>
-            <li>
-                <%= user.username %> - <%= user.email %> 
-                <% if (!user.admin) { %>
-                    <form action="/admin/delete-user/<%= user._id %>" method="POST" style="display:inline;">
-                        <button type="submit">Delete User</button>
-                    </form>
-                <% } %>
-            </li>
-        <% }); %>
-    </ul>
+    <section>
+        <h2>Manage Users</h2>
+        <% if (users.length > 0) { %>
+            <ul>
+                <% users.forEach(user => { %>
+                    <li>
+                        <strong><%= user.username %></strong> - <%= user.email %>
+                        <form action="/admin/delete-user/<%= user._id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete User</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No non-admin users to display.</p>
+        <% } %>
+    </section>
 
-    <h2>Manage Pets</h2>
-    <ul>
-        <% pets.forEach(pet => { %>
-            <li>
-                <%= pet.name %> (Breed: <%= pet.breed %>)
-                <form action="/admin/delete-pet/<%= pet._id %>" method="POST" style="display:inline;">
-                    <button type="submit">Delete Pet</button>
-                </form>
-                <a href="/pets/edit/<%= pet._id %>">Edit</a>
-            </li>
-        <% }); %>
-    </ul>
+    <section>
+        <h2>Manage Pets</h2>
+        <% if (pets.length > 0) { %>
+            <ul>
+                <% pets.forEach(pet => { %>
+                    <li>
+                        <strong><%= pet.name %> (Breed: <%= pet.breed %>)</strong>
+                        <a href="/pets/<%= pet._id %>">View Details</a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No pets available for review.</p>
+        <% } %>
+    </section>
+
 </body>
 </html>
