@@ -18,6 +18,8 @@
                     <p>Price: <%= pet.price %></p>
                     <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
                     <a href="/pets/<%= pet._id %>">View Details</a>
+                    <a href="/create-pet">Add a Pet</a>
+
                 </li>
             <% }); %>
         <% } else { %>
