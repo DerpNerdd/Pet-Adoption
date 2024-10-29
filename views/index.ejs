@@ -8,18 +8,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Available Pets</h1>
     <h1 class="poppins-regular">ZORRO</h1>
     <ul>
         <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
-                <li>
-                    <h2><%= pet.name %> (Breed: <%= pet.breed %>)</h2>
-                    <p>Age: <%= pet.age %></p>
-                    <p>Location: <%= pet.location %></p>
-                    <p>Price: <%= pet.price %></p>
-                    <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
-                    <a href="/pets/<%= pet._id %>">View Details</a>
+                <li><a href="/pets/<%= pet._id %>">
+                    <div class="pet-image">
+                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
+                    </div>
+                        <div class="container">
+                            <h2><%= pet.name %></h2>
+                            <p class="age"><%= pet.age %></p>
+                            <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
+                            <p class="price">$<%= pet.price %></p>
+                        </div>
+                    </a>
                     <a href="/create-pet">Add a Pet</a>
 
                 </li>
@@ -28,6 +31,7 @@
             <p>No pets available for adoption.</p>
         <% } %>
     </ul>
-    <script src="./app.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
