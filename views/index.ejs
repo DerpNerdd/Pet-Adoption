@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="poppins-regular">ZORRO</h1>
+    <h1 class="title">Zorro</h1>
+    <a href="/create-pet">Add a Pet</a>
     <ul>
         <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
                 <li><a href="/pets/<%= pet._id %>">
                     <div class="pet-image">
-                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="100px">
+                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
                     </div>
                         <div class="container">
                             <h2><%= pet.name %></h2>
@@ -23,7 +24,7 @@
                             <p class="price">$<%= pet.price %></p>
                         </div>
                     </a>
-                    <a href="/create-pet">Add a Pet</a>
+                    
 
                 </li>
             <% }); %>
