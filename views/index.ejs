@@ -14,18 +14,19 @@
         <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
                 <li><a href="/pets/<%= pet._id %>">
-                    <div class="pet-image">
-                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
-                    </div>
-                        <div class="container">
-                            <h2><%= pet.name %></h2>
-                            <p class="age"><%= pet.age %></p>
-                            <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                            <p class="price">$<%= pet.price %></p>
+                        <div class="pet-image">
+                            <div class="shadow">
+                                <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
+                                <div class="container">
+                                    <h2><%= pet.name %></h2>
+                                    <p class="age"><%= pet.age %></p>
+                                    <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
+                                    <p class="price">$<%= pet.price %></p>
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                    
 
+                    </a>
                 </li>
             <% }); %>
         <% } else { %>
