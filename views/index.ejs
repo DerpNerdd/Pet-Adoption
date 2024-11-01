@@ -9,14 +9,19 @@
 </head>
 <body>
     <h1 class="title">Zorro</h1>
+    <div class="search-container">
+        <input type="text" placeholder="Search" name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </div>
     <a href="/create-pet">Add a Pet</a>
+    <a href="/signup">Sign-in</a>
     <ul>
         <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
                 <li><a href="/pets/<%= pet._id %>">
                         <div class="pet-image">
+                            <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
                             <div class="shadow">
-                                <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
                                 <div class="container">
                                     <h2><%= pet.name %></h2>
                                     <p class="age"><%= pet.age %></p>
@@ -25,7 +30,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </a>
                 </li>
             <% }); %>
