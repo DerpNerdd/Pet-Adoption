@@ -18,11 +18,15 @@
 }
 
 /* Search */
+.search-container{
+    display: flex;
+}
 
 .search-container input{
     width: 50vw;
     height: 5vh;
     border-radius: 50px;
+
 }
 
 /* For pet picture profile on the homepage */
