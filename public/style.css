@@ -11,6 +11,15 @@
     scrollbar-width: thin;
     scrollbar-color: #FFD569 #E7EDF2;
 }
+
+.main-content{
+    display: flex;
+    align-content: center;
+}
+/*Buttons Ex. Sign-In, Add, etc.*/
+
+
+
 /* Title */
 
 .title{
@@ -20,6 +29,7 @@
 /* Search */
 .search-container{
     display: flex;
+    grid-row: 3/4
 }
 
 .search-container input{
@@ -30,6 +40,12 @@
 }
 
 /* For pet picture profile on the homepage */
+.line-top {
+    width: 65rem;
+    height: 2px;
+    background-color: #333;
+}
+
 .container{
     display: grid;
     grid-template-columns: auto auto auto;
@@ -81,15 +97,18 @@ ul{
     display: relative;
 }
 
-.pet-image{
+.img-hover-zoom {
+    grid-row: 4/5;
     width: 22rem;
     height: auto;
     position: relative;
-
     border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 10px rgba(83, 83, 83, 0.5);
 }
 
-.pet-image img {
+.img-hover-zoom img {
+    transition: transform .5s ease;
     width: 22rem;
     height: auto;
     aspect-ratio: 1/1.3;
@@ -97,11 +116,16 @@ ul{
     position: relative;
     z-index: -100;
     display: block;
-    box-shadow: 0 10px 10px rgba(81, 81, 81, 0.5);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
+
+.img-hover-zoom:hover img {
+    transform: scale(1.1);
+}
+
 .shadow{
     width: 22rem;
-    height: 10.8vh;
+    height: 10.4vh;
     z-index: 500;
     position: relative;
     bottom: 0;
