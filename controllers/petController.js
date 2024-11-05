@@ -3,21 +3,28 @@ const Pet = require('../models/pet');
 const getAllPets = async (req, res) => {
     try {
         const pets = await Pet.find();
-        res.render('index', { pets });
+        res.render('index', { pets, user: req.user || null }); // Pass user to template
     } catch (error) {
         res.status(500).send('Error loading pets');
     }
 };
 
 const createPet = async (req, res) => {
+    console.log("Incoming request body for pet creation:", req.body);
+    
     try {
         const pet = new Pet(req.body);
         await pet.save();
+        console.log("Pet created successfully:", pet);
         res.redirect('/');
     } catch (error) {
-        res.status(500).send('Error creating pet');
+        console.error("Error creating pet:", error);
+
+        // Send a more detailed error message for debugging
+        res.status(500).send(`Error creating pet: ${error.message}`);
     }
 };
+
 
 const getPet = async (req, res) => {
     try {
@@ -40,13 +47,16 @@ const updatePet = async (req, res) => {
 
 const deletePet = async (req, res) => {
     if (!req.user.admin) {
+        console.log("Access denied for non-admin user attempting to delete pet.");
         return res.status(403).send('Access denied');
     }
 
     try {
         await Pet.findByIdAndDelete(req.params.id);
+        console.log("Pet deleted successfully:", req.params.id);
         res.redirect('/admin');
     } catch (error) {
+        console.error("Error deleting pet:", error);
         res.status(500).send('Error deleting pet');
     }
 };

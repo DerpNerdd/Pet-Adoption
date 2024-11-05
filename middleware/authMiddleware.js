@@ -5,7 +5,8 @@ const authMiddleware = async (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.status(401).redirect('/login'); 
+        req.user = null; // No token, so no user logged in
+        return next();
     }
 
     try {
@@ -13,14 +14,16 @@ const authMiddleware = async (req, res, next) => {
         const user = await User.findById(decoded.userId);
 
         if (!user) {
-            return res.status(401).redirect('/login');
+            req.user = null;
+            return next();
         }
 
-        req.user = user;  // Set the full user object, including admin status, on req.user
+        req.user = user;  // Attach full user object to req.user
         next();
     } catch (error) {
         console.error("Token verification failed:", error);
-        res.status(401).redirect('/login');
+        req.user = null;
+        next();
     }
 };
 

@@ -34,6 +34,10 @@
                     <li>
                         <strong><%= pet.name %> (Breed: <%= pet.breed %>)</strong>
                         <a href="/pets/<%= pet._id %>">View Details</a>
+                        <!-- Delete Pet Form -->
+                        <form action="/pets/delete/<%= pet._id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete Pet</button>
+                        </form>
                     </li>
                 <% }); %>
             </ul>
@@ -41,6 +45,7 @@
             <p>No pets available for review.</p>
         <% } %>
     </section>
+    
 
 </body>
 </html>
