@@ -12,10 +12,6 @@
     scrollbar-color: #FFD569 #E7EDF2;
 }
 
-.main-content{
-    display: flex;
-    align-content: center;
-}
 /*Buttons Ex. Sign-In, Add, etc.*/
 
 
@@ -29,7 +25,6 @@
 /* Search */
 .search-container{
     display: flex;
-    grid-row: 3/4
 }
 
 .search-container input{
@@ -98,7 +93,6 @@ ul{
 }
 
 .img-hover-zoom {
-    grid-row: 4/5;
     width: 22rem;
     height: auto;
     position: relative;
@@ -125,7 +119,7 @@ ul{
 
 .shadow{
     width: 22rem;
-    height: 10.4vh;
+    height: auto;
     z-index: 500;
     position: relative;
     bottom: 0;

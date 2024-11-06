@@ -8,22 +8,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a class="add-pet" href="/create-pet">Add a Pet</a>
-    <a class="sign-in" href="/signup">Sign-in</a>
-    <div class="main-content">
+        <a href="/create-pet">Add a Pet</a>
+        <a href="/signup">Sign-in</a>
         <h1 class="title">Zorro</h1>
         <div class="search-container">
             <input type="text" placeholder="Search" name="search"><ion-icon name="search-outline"></ion-icon></input>
         </div>
-
         <div class="line-top"></div>
             <ul>
-                <% if (pets && pets.length > 0) { %>
-                    <% pets.forEach(pet => { %>
-                        <li><a href="/pets/<%= pet._id %>">
-                                <div class="img-hover-zoom img-hover-zoom--xyz" class="pet-image">
-                                    <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
+                    <% if (pets && pets.length > 0) { %>
+                        <% pets.forEach(pet => { %>
+                            <li><a href="/pets/<%= pet._id %>">
+                                <div class="img-hover-zoom img-hover-zoom--xyz">
                                     <div class="shadow">
+                                        <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
                                         <div class="container">
                                             <h2><%= pet.name %></h2>
                                             <p class="age"><%= pet.age %></p>
@@ -31,40 +29,14 @@
                                             <p class="price">$<%= pet.price %></p>
                                         </div>
                                     </div>
-    <h1 class="title">Zorro</h1>
-    <div class="search-container">
-        <input type="text" placeholder="Search" name="search"><ion-icon name="search-outline"></ion-icon></input>
-    </div>
-    <a href="/create-pet">Add a Pet</a>
-    <nav>
-        <% if (!user) { %>
-            <a href="/signup">Sign Up</a>
-            <a href="/login">Login</a>
-        <% } else { %>
-            <a href="/logout">Logout</a>
-        <% } %>
-    </nav>
-
-    <ul>
-        <% if (pets && pets.length > 0) { %>
-            <% pets.forEach(pet => { %>
-                <li><a href="/pets/<%= pet._id %>">
-                        <div class="pet-image">
-                            <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
-                            <div class="shadow">
-                                <div class="container">
-                                    <h2><%= pet.name %></h2>
-                                    <p class="age"><%= pet.age %></p>
-                                    <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                                    <p class="price">$<%= pet.price %></p>
                                 </div>
-                            </a>
-                        </li>
-                    <% }); %>
-                <% } else { %>
-                    <p>No pets available for adoption.</p>
-                <% } %>
-            </ul>
+                                    </a>
+                                </li>
+                            <% }); %>
+                        <% } else { %>
+                            <p>No pets available for adoption.</p>
+                        <% } %>
+                    </ul>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
