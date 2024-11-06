@@ -27,11 +27,16 @@
             <% pets.forEach(pet => { %>
                 <li><a href="/pets/<%= pet._id %>">
                         <div class="pet-image">
-                            <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
+                            <!-- Construct image path based on pet ID and profile image filename -->
+                            <% if (pet.profileImage) { %>
+                                <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
+                                <% } else { %>
+                                <img src="/images/default-placeholder.png" alt="No image available">
+                            <% } %>
                             <div class="shadow">
                                 <div class="container">
                                     <h2><%= pet.name %></h2>
-                                    <p class="age"><%= pet.age %></p>
+                                    <p class="age"><%= pet.age %> years</p>
                                     <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
                                     <p class="price">$<%= pet.price %></p>
                                 </div>

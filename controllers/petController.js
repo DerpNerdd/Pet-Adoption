@@ -1,4 +1,6 @@
 const Pet = require('../models/pet');
+const fs = require('fs');
+const path = require('path');
 
 const getAllPets = async (req, res) => {
     try {
@@ -10,20 +12,40 @@ const getAllPets = async (req, res) => {
 };
 
 const createPet = async (req, res) => {
-    console.log("Incoming request body for pet creation:", req.body);
-    
     try {
-        const pet = new Pet(req.body);
+        const petData = {
+            _id: req.tempPetId, // Use the ID generated earlier
+            name: req.body.name,
+            age: req.body.age,
+            price: req.body.price,
+            location: req.body.location,
+            breed: req.body.breed,
+            description: req.body.description,
+            behavior: req.body.behavior,
+            history: req.body.history,
+            owner: req.user._id
+        };
+
+        // Process images if provided
+        if (req.files && req.files.profileImage) {
+            const profileImage = req.files.profileImage[0].filename;
+            petData.profileImage = `/petimages/${petData._id}/${profileImage}`;
+            console.log(`Profile image path set for pet: ${petData.profileImage}`);
+        } else {
+            console.log("No profile image provided in request.");
+        }
+
+        // Create and save the pet
+        const pet = new Pet(petData);
         await pet.save();
         console.log("Pet created successfully:", pet);
         res.redirect('/');
     } catch (error) {
         console.error("Error creating pet:", error);
-
-        // Send a more detailed error message for debugging
-        res.status(500).send(`Error creating pet: ${error.message}`);
+        res.status(500).send("An error occurred while creating the pet.");
     }
 };
+
 
 
 const getPet = async (req, res) => {

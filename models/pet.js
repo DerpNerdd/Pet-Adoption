@@ -18,10 +18,14 @@ const petProfileSchema = new mongoose.Schema({
         required: [true, 'You must provide a price']
     },
     location: {
-        type: String,
-        required: [true, 'You must provide a location'],
-        trim: true,
-        minlength: [2, 'Location must be at least 2 characters']
+        state: {
+            type: String,
+            required: [true, 'You must provide a state']
+        },
+        city: {
+            type: String,
+            required: [true, 'You must provide a city']
+        }
     },
     breed: {
         type: String,
@@ -47,7 +51,7 @@ const petProfileSchema = new mongoose.Schema({
         required: [true, 'You must provide a profile picture']
     },
     images: {
-        type: [String], 
+        type: [String],
         validate: {
             validator: (val) => val.length <= 5,
             message: 'You can upload a maximum of 5 images'
