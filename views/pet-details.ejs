@@ -14,7 +14,10 @@
     <p>Description: <%= pet.description %></p>
     <p>Behavior: <%= pet.behavior %></p>
     <p>History: <%= pet.history %></p>
-    <img src="<%= pet.profileImage %>" alt="<%= pet.name %>" width="200px">
+    <img src="<%= pet.profileImage.url %>" alt="Profile Image">
+    <% pet.images.forEach(image => { %>
+        <img src="<%= image.url %>" alt="Pet Image">
+    <% }); %>    
     <a href="/">Back to List</a>
 </body>
 </html>

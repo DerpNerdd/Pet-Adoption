@@ -1,20 +1,65 @@
 const Pet = require('../models/pet');
-const fs = require('fs');
-const path = require('path');
+const { cloudinary } = require('../config/cloudinaryConfig');
 
 const getAllPets = async (req, res) => {
     try {
-        const pets = await Pet.find();
-        res.render('index', { pets, user: req.user || null }); // Pass user to template
+        // Extract query parameters
+        const { breed, minAge, maxAge, state, city, sortPrice } = req.query;
+
+        // Build the query object
+        let queryObject = {};
+
+        // Add breed filter
+        if (breed) {
+            queryObject.breed = { $regex: breed, $options: 'i' }; // Case-insensitive regex search
+        }
+
+        // Add age filter
+        if (minAge || maxAge) {
+            queryObject.age = {};
+            if (minAge) queryObject.age.$gte = Number(minAge);
+            if (maxAge) queryObject.age.$lte = Number(maxAge);
+        }
+
+        // Add location filter
+        if (state || city) {
+            if (state) queryObject['location.state'] = state;
+            if (city) queryObject['location.city'] = { $regex: city, $options: 'i' };
+        }
+
+        // Initialize query
+        let query = Pet.find(queryObject);
+
+        // Add sorting
+        if (sortPrice) {
+            const sortOrder = sortPrice === 'lowToHigh' ? 1 : -1;
+            query = query.sort({ price: sortOrder });
+        }
+
+        // Execute query
+        const pets = await query.exec();
+
+        // Pass query parameters to the view
+        res.render('index', {
+            pets,
+            user: req.user || null,
+            breed,
+            minAge,
+            maxAge,
+            state,
+            city,
+            sortPrice
+        });
     } catch (error) {
+        console.error("Error loading pets:", error);
         res.status(500).send('Error loading pets');
     }
 };
 
+
 const createPet = async (req, res) => {
     try {
         const petData = {
-            _id: req.tempPetId, // Use the ID generated earlier
             name: req.body.name,
             age: req.body.age,
             price: req.body.price,
@@ -26,13 +71,25 @@ const createPet = async (req, res) => {
             owner: req.user._id
         };
 
-        // Process images if provided
+        // Process profile image if provided
         if (req.files && req.files.profileImage) {
-            const profileImage = req.files.profileImage[0].filename;
-            petData.profileImage = `/petimages/${petData._id}/${profileImage}`;
-            console.log(`Profile image path set for pet: ${petData.profileImage}`);
+            const profileImage = req.files.profileImage[0];
+            // Set profileImage as an object with url and public_id
+            petData.profileImage = {
+                url: profileImage.path,
+                public_id: profileImage.filename
+            };
+            console.log(`Profile image URL set for pet: ${petData.profileImage.url}`);
         } else {
             console.log("No profile image provided in request.");
+        }
+
+        // Handle additional images
+        if (req.files && req.files.images) {
+            petData.images = req.files.images.map(file => ({
+                url: file.path,
+                public_id: file.filename
+            }));
         }
 
         // Create and save the pet
@@ -45,7 +102,6 @@ const createPet = async (req, res) => {
         res.status(500).send("An error occurred while creating the pet.");
     }
 };
-
 
 
 const getPet = async (req, res) => {
@@ -74,9 +130,23 @@ const deletePet = async (req, res) => {
     }
 
     try {
-        await Pet.findByIdAndDelete(req.params.id);
-        console.log("Pet deleted successfully:", req.params.id);
-        res.redirect('/admin');
+        const pet = await Pet.findById(req.params.id);
+        if (pet) {
+            // Delete profile image from Cloudinary
+            await cloudinary.uploader.destroy(pet.profileImage.public_id);
+
+            // Delete additional images
+            for (let image of pet.images) {
+                await cloudinary.uploader.destroy(image.public_id);
+            }
+
+            // Delete pet from database
+            await Pet.findByIdAndDelete(req.params.id);
+            console.log("Pet deleted successfully:", req.params.id);
+            res.redirect('/admin');
+        } else {
+            res.status(404).send('Pet not found');
+        }
     } catch (error) {
         console.error("Error deleting pet:", error);
         res.status(500).send('Error deleting pet');

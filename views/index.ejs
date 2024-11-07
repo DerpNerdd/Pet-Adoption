@@ -9,10 +9,49 @@
 </head>
 <body>
     <h1 class="title">Zorro</h1>
-    <div class="search-container">
-        <input type="text" placeholder="Search" name="search"><ion-icon name="search-outline"></ion-icon></input>
-    </div>
-    <a href="/create-pet">Add a Pet</a>
+
+    <!-- Filter and Sort Form -->
+    <form action="/" method="GET" id="filterForm">
+        <!-- Breed Filter -->
+        <label for="breed">Breed:</label>
+        <input type="text" id="breed" name="breed" value="<%= typeof breed !== 'undefined' ? breed : '' %>">
+
+        <!-- Age Filter -->
+        <label for="minAge">Min Age:</label>
+        <input type="number" id="minAge" name="minAge" min="0" value="<%= typeof minAge !== 'undefined' ? minAge : '' %>">
+
+        <label for="maxAge">Max Age:</label>
+        <input type="number" id="maxAge" name="maxAge" min="0" value="<%= typeof maxAge !== 'undefined' ? maxAge : '' %>">
+
+        <!-- Location Filter -->
+        <label for="state">State:</label>
+        <select id="state" name="state">
+            <option value="">All States</option>
+            <!-- Add options for states -->
+            <option value="AL" <%= state === 'AL' ? 'selected' : '' %>>Alabama</option>
+            <option value="AK" <%= state === 'AK' ? 'selected' : '' %>>Alaska</option>
+            <option value="AZ" <%= state === 'AZ' ? 'selected' : '' %>>Arizona</option>
+            <option value="AR" <%= state === 'AR' ? 'selected' : '' %>>Arkansas</option>
+            <option value="CA" <%= state === 'CA' ? 'selected' : '' %>>California</option>
+            <!-- Add all other states similarly -->
+        </select>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" value="<%= typeof city !== 'undefined' ? city : '' %>">
+
+        <!-- Sorting -->
+        <label for="sortPrice">Sort by Price:</label>
+        <select id="sortPrice" name="sortPrice">
+            <option value="">No Sorting</option>
+            <option value="lowToHigh" <%= sortPrice === 'lowToHigh' ? 'selected' : '' %>>Low to High</option>
+            <option value="highToLow" <%= sortPrice === 'highToLow' ? 'selected' : '' %>>High to Low</option>
+        </select>
+
+        <button type="submit">Apply Filters</button>
+        <button type="button" onclick="resetFilters()">Reset Filters</button>
+    </form>
+
+    <!-- Existing Navigation Links -->
     <nav>
         <% if (!user) { %>
             <a href="/signup">Sign Up</a>
@@ -22,32 +61,46 @@
         <% } %>
     </nav>
 
+    <!-- Add a Pet Link -->
+    <a href="/create-pet">Add a Pet</a>
+
+    <!-- Pet Listings -->
     <ul>
         <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
-                <li><a href="/pets/<%= pet._id %>">
+                <li>
+                    <a href="/pets/<%= pet._id %>">
                         <div class="pet-image">
-                            <!-- Construct image path based on pet ID and profile image filename -->
-                            <% if (pet.profileImage) { %>
-                                <img src="<%= pet.profileImage %>" alt="<%= pet.name %>">
-                                <% } else { %>
+                            <% if (pet.profileImage && pet.profileImage.url) { %>
+                                <img src="<%= pet.profileImage.url %>" alt="<%= pet.name %>">
+                            <% } else { %>
                                 <img src="/images/default-placeholder.png" alt="No image available">
                             <% } %>
-                            <div class="shadow">
-                                <div class="container">
-                                    <h2><%= pet.name %></h2>
-                                    <p class="age"><%= pet.age %> years</p>
-                                    <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                                    <p class="price">$<%= pet.price %></p>
-                                </div>
-                                    </a>
-                                </li>
-                            <% }); %>
-                        <% } else { %>
-                            <p>No pets available for adoption.</p>
-                        <% } %>
-                    </ul>
-    </div>
+                        </div>
+                        <div class="shadow">
+                            <div class="container">
+                                <h2><%= pet.name %></h2>
+                                <p class="age"><%= pet.age %> years</p>
+                                <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
+                                <p class="price">$<%= pet.price %></p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <p>No pets available for adoption.</p>
+        <% } %>
+    </ul>
+
+    <!-- Optional JavaScript to reset filters -->
+    <script>
+        function resetFilters() {
+            window.location.href = '/';
+        }
+    </script>
+
+    <!-- Ionicons Script -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
