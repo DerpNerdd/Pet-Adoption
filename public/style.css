@@ -1,65 +1,396 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-/* Base styles */
+/* Base Styles */
 * {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
-    scrollbar-width: thin;
-    scrollbar-color: #FFD569 #E7EDF2;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Hind', sans-serif;
 }
 
-/* Title */
-.title {
-    font-size: 100px;
+/* Colors */
+:root {
+    --primary-green: #19b95c; /* A nice dark green */
 }
 
-/* Search Container */
-.search-container {
+/* Body */
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Import Font */
+@font-face {
+    font-family: 'Hind';
+    src: url(./fonts/Hind-Regular.ttf) format('truetype');
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #fff; /* Removed green background */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /* Removed bottom border */
+}
+
+/* Removed separator line */
+.nav-divider {
+    display: none;
+}
+
+/* Desktop Navbar */
+.desktop-row {
+    display: none; /* Hidden on mobile */
+}
+
+.desktop-row .row-1,
+.desktop-row .row-2 {
     display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    /* Removed background color */
 }
 
-.search-container input {
-    width: 50vw;
-    height: 5vh;
-    border-radius: 50px;
+.desktop-row .row-1 .left-section {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.desktop-row .logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-green); /* Green text */
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.desktop-row .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 6px 10px;
+    border-radius: 25px; /* More rounded */
+    border: 1px solid #ccc;
+    margin-right: 20px;
+    width: 100%; /* Make it longer */
+    max-width: 600px; /* Limit the maximum width */
+}
+
+.desktop-row .search-bar ion-icon {
+    font-size: 20px;
+    color: var(--primary-green);
+    margin-right: 8px;
+}
+
+.desktop-row .search-bar input {
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.desktop-row .search-bar input:focus {
+    outline: none;
+}
+
+.desktop-row .location-filter select,
+.desktop-row .location-filter input {
+    margin-left: 10px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* More rounded */
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.desktop-row .location-filter select {
+    color: #333;
+}
+
+.desktop-row .right-section {
+    display: flex;
+    align-items: center;
+}
+
+.desktop-row .nav-button {
+    margin-left: 15px;
+    font-size: 16px;
+    color: var(--primary-green); /* Green text */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.desktop-row .nav-button:hover {
+    text-decoration: underline;
+}
+
+/* Desktop Row 2 Filters */
+.desktop-row .row-2 {
+    /* Removed background color and border */
+    padding: 10px 15px;
+}
+
+.desktop-row .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content */
+    flex-wrap: wrap;
+}
+
+.desktop-row .row-2 .filter-group {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.desktop-row .row-2 .filter-group input,
+.desktop-row .row-2 .filter-group select {
+    margin-left: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* More rounded */
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.desktop-row .row-2 .filter-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.desktop-row .row-2 .apply-filters,
+.desktop-row .row-2 .reset-filters {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px; /* More rounded */
+    font-weight: 600;
+    background-color: var(--primary-green);
+    color: #fff;
+}
+
+.apply-filters:hover,
+.reset-filters:hover {
+    opacity: 0.9;
+}
+
+/* Mobile Navbar */
+.mobile-row {
+    display: block; /* Visible on mobile */
+    background-color: var(--primary-green);
+}
+
+.mobile-row-1,
+.mobile-row-2,
+.mobile-row-3 {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+.mobile-row-1 {
+    justify-content: space-between;
+}
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    font-size: 24px;
+}
+
+.hamburger-menu ion-icon {
+    font-size: 28px;
+    color: #fff;
+}
+
+.mobile-row .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.mobile-row .nav-button {
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.mobile-row .nav-button:hover {
+    text-decoration: underline;
+}
+
+.mobile-row-2 .search-bar {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.mobile-row .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 6px 10px;
+    border-radius: 25px; /* More rounded */
+    border: 1px solid #ccc;
+}
+
+.mobile-row .search-bar ion-icon {
+    font-size: 20px;
+    color: var(--primary-green);
+    margin-right: 8px;
+}
+
+.mobile-row .search-bar input {
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.mobile-row .search-bar input:focus {
+    outline: none;
+}
+
+.mobile-row-3 .location-filter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.mobile-row-3 .location-filter select,
+.mobile-row-3 .location-filter input {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* More rounded */
+    background-color: #fff;
+    color: #333;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    display: none;
+    background-color: #fff;
+    padding: 15px;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.mobile-menu .filter-group {
+    margin-bottom: 15px;
+}
+
+.mobile-menu .filter-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.mobile-menu .filter-group input,
+.mobile-menu .filter-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+.mobile-menu .filter-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.mobile-menu .apply-filters,
+.mobile-menu .reset-filters {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    background-color: var(--primary-green);
+    color: #fff;
+}
+
+.apply-filters:hover,
+.reset-filters:hover {
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    /* Show desktop navbar */
+    .desktop-row {
+        display: block;
+    }
+    /* Hide mobile navbar */
+    .mobile-row {
+        display: none;
+    }
+    .mobile-menu {
+        display: none !important;
+    }
 }
 
 /* Pet Listings */
-ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.pet-listings {
+    padding: 30px 10px;
 }
 
-li {
-    margin: 20px;
+/* Grid layout */
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on mobile */
+    grid-gap: 15px;
+}
+
+/* Pet Card */
+.pet-card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pet-card a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Pet Image Container */
 .pet-image {
     position: relative;
-    width: 400px;           
-    height: 500px;         
-    object-fit: cover;     
-    overflow: hidden;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 10px 10px rgba(83, 83, 83, 0.5);
-}
-
-/* Hover Zoom Effect */
-.img-hover-zoom img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform .5s ease;
+    padding-top: 100%; /* Makes it a square */
+    overflow: hidden;
 }
 
-.img-hover-zoom:hover img {
-    transform: scale(1.1);
+.pet-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s ease;
+}
+
+.pet-image:hover img {
+    transform: scale(1.05);
 }
 
 /* Shadow Overlay */
@@ -69,60 +400,64 @@ li {
     left: 0;
     width: 100%;
     height: 40%;
-    background: linear-gradient(0deg, #191c23 0%, rgba(39, 45, 61, 0) 100%);
+    background: linear-gradient(0deg, rgba(0,0,0,0.7), transparent);
     display: flex;
     align-items: flex-end;
-    border-radius: 0 0 20px 20px;
-    z-index: 1;
+    padding: 5px 10px;
 }
 
 .text-container {
-    padding: 10px;
     color: #fff;
 }
 
-/* Text Styles */
+/* Pet Name, Age, and Price */
 .text-container h2 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.text-container p {
-    margin: 5px 0;
     font-size: 16px;
+    margin: 0;
 }
 
-/* Dot and Info */
-.dot ion-icon {
+.text-container .info {
+    font-size: 14px;
+}
+
+/* City and State Below the Card */
+.pet-location {
+    margin-top: 5px;
     font-size: 12px;
-    vertical-align: middle;
+    color: #777;
+    text-align: left;
 }
 
-.age,
-.price,
-.dot {
-    display: inline-block;
-    margin-right: 5px;
-}
-
-/* Links */
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-
-/* Ionicons Fix */
-ion-icon {
-    vertical-align: middle;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .pet-image, .shadow {
-        width: 18rem;
+/* Adjustments for Laptop View */
+@media (min-width: 992px) {
+    /* Increase side padding */
+    .pet-listings {
+        padding: 50px 50px;
     }
-    .container {
-        margin-left: 5%;
+
+    /* Grid layout with 6 columns */
+    .pet-grid {
+        grid-template-columns: repeat(6, 1fr);
     }
+}
+
+/* Hide elements on mobile */
+@media (max-width: 991px) {
+    .text-container,
+    .pet-location {
+        display: none;
+    }
+
+    /* Adjust padding in listings */
+    .pet-listings {
+        padding: 15px 10px;
+    }
+}
+
+/* No Pets Message */
+.no-pets {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 50px;
 }

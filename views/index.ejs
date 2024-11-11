@@ -1,151 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Existing head content -->
+    <!-- Meta Tags for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Pets for Adoption</title>
-    <link rel="shortcut icon" href="./public/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <title>Zorro - Find Your Perfect Companion</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-    <h1 class="title">Zorro</h1>
-
-    <!-- Filter, Sort, and Search Form -->
-    <form action="/" method="GET" id="filterForm">
-        <!-- Search Bar -->
-        <label for="searchTerm">Search:</label>
-        <input type="text" id="searchTerm" name="searchTerm" placeholder="Enter keyword" value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
-
-        <!-- Breed Filter -->
-        <label for="breed">Breed:</label>
-        <input type="text" id="breed" name="breed" value="<%= typeof breed !== 'undefined' ? breed : '' %>">
-
-        <!-- Age Filter -->
-        <label for="minAge">Min Age:</label>
-        <input type="number" id="minAge" name="minAge" min="0" value="<%= typeof minAge !== 'undefined' ? minAge : '' %>">
-
-        <label for="maxAge">Max Age:</label>
-        <input type="number" id="maxAge" name="maxAge" min="0" value="<%= typeof maxAge !== 'undefined' ? maxAge : '' %>">
-
-        <!-- Location Filter -->
-        <label for="state">State:</label>
-        <select id="state" name="state">
-            <option value="">All States</option>
-            <option value="AL" <%= state === 'AL' ? 'selected' : '' %>>Alabama</option>
-            <option value="AK" <%= state === 'AK' ? 'selected' : '' %>>Alaska</option>
-            <option value="AZ" <%= state === 'AZ' ? 'selected' : '' %>>Arizona</option>
-            <option value="AR" <%= state === 'AR' ? 'selected' : '' %>>Arkansas</option>
-            <option value="CA" <%= state === 'CA' ? 'selected' : '' %>>California</option>
-            <option value="CO" <%= state === 'CO' ? 'selected' : '' %>>Colorado</option>
-            <option value="CT" <%= state === 'CT' ? 'selected' : '' %>>Connecticut</option>
-            <option value="DE" <%= state === 'DE' ? 'selected' : '' %>>Delaware</option>
-            <option value="FL" <%= state === 'FL' ? 'selected' : '' %>>Florida</option>
-            <option value="GA" <%= state === 'GA' ? 'selected' : '' %>>Georgia</option>
-            <option value="HI" <%= state === 'HI' ? 'selected' : '' %>>Hawaii</option>
-            <option value="ID" <%= state === 'ID' ? 'selected' : '' %>>Idaho</option>
-            <option value="IL" <%= state === 'IL' ? 'selected' : '' %>>Illinois</option>
-            <option value="IN" <%= state === 'IN' ? 'selected' : '' %>>Indiana</option>
-            <option value="IA" <%= state === 'IA' ? 'selected' : '' %>>Iowa</option>
-            <option value="KS" <%= state === 'KS' ? 'selected' : '' %>>Kansas</option>
-            <option value="KY" <%= state === 'KY' ? 'selected' : '' %>>Kentucky</option>
-            <option value="LA" <%= state === 'LA' ? 'selected' : '' %>>Louisiana</option>
-            <option value="ME" <%= state === 'ME' ? 'selected' : '' %>>Maine</option>
-            <option value="MD" <%= state === 'MD' ? 'selected' : '' %>>Maryland</option>
-            <option value="MA" <%= state === 'MA' ? 'selected' : '' %>>Massachusetts</option>
-            <option value="MI" <%= state === 'MI' ? 'selected' : '' %>>Michigan</option>
-            <option value="MN" <%= state === 'MN' ? 'selected' : '' %>>Minnesota</option>
-            <option value="MS" <%= state === 'MS' ? 'selected' : '' %>>Mississippi</option>
-            <option value="MO" <%= state === 'MO' ? 'selected' : '' %>>Missouri</option>
-            <option value="MT" <%= state === 'MT' ? 'selected' : '' %>>Montana</option>
-            <option value="NE" <%= state === 'NE' ? 'selected' : '' %>>Nebraska</option>
-            <option value="NV" <%= state === 'NV' ? 'selected' : '' %>>Nevada</option>
-            <option value="NH" <%= state === 'NH' ? 'selected' : '' %>>New Hampshire</option>
-            <option value="NJ" <%= state === 'NJ' ? 'selected' : '' %>>New Jersey</option>
-            <option value="NM" <%= state === 'NM' ? 'selected' : '' %>>New Mexico</option>
-            <option value="NY" <%= state === 'NY' ? 'selected' : '' %>>New York</option>
-            <option value="NC" <%= state === 'NC' ? 'selected' : '' %>>North Carolina</option>
-            <option value="ND" <%= state === 'ND' ? 'selected' : '' %>>North Dakota</option>
-            <option value="OH" <%= state === 'OH' ? 'selected' : '' %>>Ohio</option>
-            <option value="OK" <%= state === 'OK' ? 'selected' : '' %>>Oklahoma</option>
-            <option value="OR" <%= state === 'OR' ? 'selected' : '' %>>Oregon</option>
-            <option value="PA" <%= state === 'PA' ? 'selected' : '' %>>Pennsylvania</option>
-            <option value="RI" <%= state === 'RI' ? 'selected' : '' %>>Rhode Island</option>
-            <option value="SC" <%= state === 'SC' ? 'selected' : '' %>>South Carolina</option>
-            <option value="SD" <%= state === 'SD' ? 'selected' : '' %>>South Dakota</option>
-            <option value="TN" <%= state === 'TN' ? 'selected' : '' %>>Tennessee</option>
-            <option value="TX" <%= state === 'TX' ? 'selected' : '' %>>Texas</option>
-            <option value="UT" <%= state === 'UT' ? 'selected' : '' %>>Utah</option>
-            <option value="VT" <%= state === 'VT' ? 'selected' : '' %>>Vermont</option>
-            <option value="VA" <%= state === 'VA' ? 'selected' : '' %>>Virginia</option>
-            <option value="WA" <%= state === 'WA' ? 'selected' : '' %>>Washington</option>
-            <option value="WV" <%= state === 'WV' ? 'selected' : '' %>>West Virginia</option>
-            <option value="WI" <%= state === 'WI' ? 'selected' : '' %>>Wisconsin</option>
-            <option value="WY" <%= state === 'WY' ? 'selected' : '' %>>Wyoming</option>
-        </select>
-
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" value="<%= typeof city !== 'undefined' ? city : '' %>">
-
-        <!-- Sorting -->
-        <label for="sortPrice">Sort by Price:</label>
-        <select id="sortPrice" name="sortPrice">
-            <option value="">No Sorting</option>
-            <option value="lowToHigh" <%= sortPrice === 'lowToHigh' ? 'selected' : '' %>>Low to High</option>
-            <option value="highToLow" <%= sortPrice === 'highToLow' ? 'selected' : '' %>>High to Low</option>
-        </select>
-
-        <button type="submit">Apply Filters</button>
-        <button type="button" onclick="resetFilters()">Reset Filters</button>
-    </form>
-
-    <!-- Existing Navigation Links -->
-    <nav>
-        <% if (!user) { %>
-            <a href="/signup">Sign Up</a>
-            <a href="/login">Login</a>
-        <% } else { %>
-            <a href="/logout">Logout</a>
-        <% } %>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Laptop View -->
+        <div class="nav-row desktop-row">
+            <!-- Wrap the filter inputs inside a form -->
+            <form action="/" method="GET" id="filterForm">
+                <!-- Row 1 -->
+                <div class="row-1">
+                    <div class="left-section">
+                        <a href="/" class="logo">Zorro</a>
+                        <div class="search-bar">
+                            <ion-icon name="search-outline"></ion-icon>
+                            <input type="text" id="searchTerm" name="searchTerm" placeholder="Search pets..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+                        </div>
+                        <div class="location-filter">
+                            <select id="state" name="state">
+                                <option value="">All States</option>
+                                <% const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID',
+                                'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT',
+                                'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+                                'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']; %>
+                                <% states.forEach(s => { %>
+                                    <option value="<%= s %>" <%= state === s ? 'selected' : '' %>><%= s %></option>
+                                <% }); %>
+                            </select>
+                            <input type="text" id="city" name="city" placeholder="City" value="<%= typeof city !== 'undefined' ? city : '' %>">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <% if (!user) { %>
+                            <a href="/login" class="nav-button">Login</a>
+                        <% } else { %>
+                            <a href="/logout" class="nav-button">Logout</a>
+                        <% } %>
+                    </div>
+                </div>
+                <!-- Row 2 -->
+                <div class="row-2">
+                    <div class="filter-container">
+                        <div class="filter-group">
+                            <input type="text" id="breed" name="breed" placeholder="Breed" value="<%= typeof breed !== 'undefined' ? breed : '' %>">
+                        </div>
+                        <div class="filter-group">
+                            <input type="number" id="minAge" name="minAge" min="0" placeholder="Min Age" value="<%= typeof minAge !== 'undefined' ? minAge : '' %>">
+                            <input type="number" id="maxAge" name="maxAge" min="0" placeholder="Max Age" value="<%= typeof maxAge !== 'undefined' ? maxAge : '' %>">
+                        </div>
+                        <div class="filter-group">
+                            <select id="sortPrice" name="sortPrice">
+                                <option value="">Sort by Price</option>
+                                <option value="lowToHigh" <%= sortPrice === 'lowToHigh' ? 'selected' : '' %>>Low to High</option>
+                                <option value="highToLow" <%= sortPrice === 'highToLow' ? 'selected' : '' %>>High to Low</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button type="submit" class="apply-filters">Apply Filters</button>
+                            <button type="button" class="reset-filters" onclick="resetFilters()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Mobile View -->
+        <div class="nav-row mobile-row">
+            <!-- Wrap mobile filters inside a form -->
+            <form action="/" method="GET" id="mobileFilterForm">
+                <!-- Row 1 -->
+                <div class="mobile-row-1">
+                    <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                    <a href="/" class="logo">Zorro</a>
+                    <% if (!user) { %>
+                        <a href="/login" class="nav-button">Login</a>
+                    <% } else { %>
+                        <a href="/logout" class="nav-button">Logout</a>
+                    <% } %>
+                </div>
+                <!-- Row 2 -->
+                <div class="mobile-row-2">
+                    <div class="search-bar">
+                        <ion-icon name="search-outline"></ion-icon>
+                        <input type="text" id="searchTermMobile" name="searchTerm" placeholder="Search pets..." value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+                    </div>
+                </div>
+                <!-- Row 3 -->
+                <div class="mobile-row-3">
+                    <div class="location-filter">
+                        <select id="stateMobile" name="state">
+                            <option value="">All States</option>
+                            <% states.forEach(s => { %>
+                                <option value="<%= s %>" <%= state === s ? 'selected' : '' %>><%= s %></option>
+                            <% }); %>
+                        </select>
+                        <input type="text" id="cityMobile" name="city" placeholder="City" value="<%= typeof city !== 'undefined' ? city : '' %>">
+                    </div>
+                </div>
+                <!-- Mobile Menu (Hidden by default) -->
+                <div id="mobileMenu" class="mobile-menu">
+                    <div class="filter-group">
+                        <label for="breedMobile">Breed:</label>
+                        <input type="text" id="breedMobile" name="breed" value="<%= typeof breed !== 'undefined' ? breed : '' %>">
+                    </div>
+                    <div class="filter-group">
+                        <label for="minAgeMobile">Min Age:</label>
+                        <input type="number" id="minAgeMobile" name="minAge" min="0" value="<%= typeof minAge !== 'undefined' ? minAge : '' %>">
+                    </div>
+                    <div class="filter-group">
+                        <label for="maxAgeMobile">Max Age:</label>
+                        <input type="number" id="maxAgeMobile" name="maxAge" min="0" value="<%= typeof maxAge !== 'undefined' ? maxAge : '' %>">
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortPriceMobile">Sort by Price:</label>
+                        <select id="sortPriceMobile" name="sortPrice">
+                            <option value="">No Sorting</option>
+                            <option value="lowToHigh" <%= sortPrice === 'lowToHigh' ? 'selected' : '' %>>Low to High</option>
+                            <option value="highToLow" <%= sortPrice === 'highToLow' ? 'selected' : '' %>>High to Low</option>
+                        </select>
+                    </div>
+                    <div class="filter-actions">
+                        <button type="submit" class="apply-filters">Apply Filters</button>
+                        <button type="button" class="reset-filters" onclick="resetFilters()">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </nav>
 
-    <!-- Add a Pet Link -->
-    <a href="/create-pet">Add a Pet</a>
-    <ul>
+    <!-- Pet Listings Section -->
+    <section class="pet-listings">
         <% if (pets && pets.length > 0) { %>
-            <% pets.forEach(pet => { %>
-                <li>
-                    <a href="/pets/<%= pet._id %>">
-                        <div class="pet-image img-hover-zoom">
-                            <% if (pet.profileImage && pet.profileImage.url) { %>
-                                <img src="<%= pet.profileImage.url %>" alt="<%= pet.name %>">
-                            <% } else { %>
-                                <img src="/images/default-placeholder.png" alt="No image available">
-                            <% } %>
-                            <!-- Move the shadow div inside pet-image -->
-                            <div class="shadow">
-                                <div class="text-container">
-                                    <h2><%= pet.name %></h2>
-                                    <p class="age"><%= pet.age %> years</p>
-                                    <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                                    <p class="price">$<%= pet.price %></p>
+            <div class="pet-grid">
+                <% pets.forEach(pet => { %>
+                    <div class="pet-card">
+                        <a href="/pets/<%= pet._id %>">
+                            <div class="pet-image img-hover-zoom">
+                                <% if (pet.profileImage && pet.profileImage.url) { %>
+                                    <img src="<%= pet.profileImage.url %>" alt="<%= pet.name %>">
+                                <% } else { %>
+                                    <img src="/images/default-placeholder.png" alt="No image available">
+                                <% } %>
+                                <div class="shadow">
+                                    <div class="text-container">
+                                        <h2><%= pet.name %></h2>
+                                        <p class="info"><%= pet.age %> years • $<%= pet.price %></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-            <% }); %>
+                        </a>
+                        <!-- City and State -->
+                        <p class="pet-location"><%= pet.location.city %>, <%= pet.location.state %></p>
+                    </div>
+                <% }); %>
+            </div>
         <% } else { %>
-            <p>No pets available for adoption.</p>
+            <p class="no-pets">No pets available for adoption.</p>
         <% } %>
-    </ul>
+    </section>
+
+    <!-- JavaScript -->
     <script>
         function resetFilters() {
             window.location.href = '/';
         }
+        function toggleMobileMenu() {
+            var menu = document.getElementById('mobileMenu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
     </script>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
