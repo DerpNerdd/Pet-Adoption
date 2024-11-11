@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Owner</title>
+    <title>Contact Pet Owner</title>
 </head>
 <body>
-    <h1>Contact Owner for <%= pet.name %></h1>
-    <form action="/api/v1/contact" method="POST">
-        <input type="hidden" name="pet" value="<%= pet._id %>">
-        <label for="message">Your Message:</label>
-        <textarea id="message" name="message" required></textarea><br>
+    <h1>Contact <%= petOwner.name %> about <%= pet.name %></h1>
+    <form action="/contact/<%= pet._id %>" method="POST">
+        <!-- Subject -->
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" value="Inquiry about <%= pet.name %>" required>
+
+        <!-- Message -->
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="10" required></textarea>
+
+        <!-- Submit Button -->
         <button type="submit">Send Message</button>
     </form>
+    <a href="/pets/<%= pet._id %>">Back to Pet Details</a>
 </body>
 </html>

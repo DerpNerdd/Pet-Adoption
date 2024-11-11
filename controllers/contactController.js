@@ -1,25 +1,68 @@
-const Contact = require('../models/contact');
-const sendEmail = require('../services/emailService');
+// controllers/contactController.js
+const Pet = require('../models/pet');
+const nodemailer = require('nodemailer');
 
-const createContactMessage = async (req, res) => {
+const showContactForm = async (req, res) => {
     try {
-        const contactMessage = await Contact.create({
-            pet: req.body.pet,
-            sender: req.user._id,
-            message: req.body.message
-        });
-
-        const petOwnerEmail = /* Fetch pet owner email based on pet ID */
-        await sendEmail({
-            to: petOwnerEmail,
-            subject: 'New Adoption Inquiry',
-            text: `You have a new inquiry about ${req.body.pet}. Message: ${req.body.message}`
-        });
-
-        res.status(201).json({ success: true, contactMessage });
+        const pet = await Pet.findById(req.params.petId).populate('owner');
+        if (!pet) {
+            return res.status(404).send('Pet not found');
+        }
+        const petOwner = pet.owner;
+        res.render('contact', { pet, petOwner });
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        console.error('Error displaying contact form:', error);
+        res.status(500).send('An error occurred');
     }
 };
 
-module.exports = { createContactMessage };
+const sendEmail = async (req, res) => {
+    const { subject, message } = req.body;
+    const { petId } = req.params;
+
+    try {
+        if (!req.user || !req.user.email) {
+            return res.status(401).send('You must be logged in to send a message.');
+        }
+
+        const pet = await Pet.findById(petId).populate('owner');
+        if (!pet) {
+            return res.status(404).send('Pet not found');
+        }
+        const petOwner = pet.owner;
+
+        const senderEmail = req.user.email;
+        const senderName = req.user.name || 'Interested Adopter';
+
+        // Configure nodemailer with your application's email account
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USERNAME,
+                pass: process.env.EMAIL_PASSWORD,
+            },
+        });
+
+        // Email options
+        const mailOptions = {
+            from: `"${senderName}" <${process.env.EMAIL_USERNAME}>`,
+            replyTo: senderEmail,
+            to: petOwner.email,
+            subject: subject,
+            text: message,
+        };
+
+        // Send the email
+        await transporter.sendMail(mailOptions);
+
+        console.log('Email sent successfully');
+
+        // Render the success page with redirection
+        res.render('email-sent');
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).send('An error occurred while sending the email.');
+    }
+};
+
+  module.exports = { showContactForm, sendEmail };

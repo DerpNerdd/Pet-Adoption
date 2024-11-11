@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pet.name %> - Pet Details</title>
+    <link rel="stylesheet" href="/pet-details.css">
 </head>
 <body>
     <h1><%= pet.name %></h1>
@@ -14,10 +14,56 @@
     <p>Description: <%= pet.description %></p>
     <p>Behavior: <%= pet.behavior %></p>
     <p>History: <%= pet.history %></p>
-    <img src="<%= pet.profileImage.url %>" alt="Profile Image">
-    <% pet.images.forEach(image => { %>
-        <img src="<%= image.url %>" alt="Pet Image">
-    <% }); %>    
+
+    <!-- Image Gallery -->
+    <div class="gallery">
+        <!-- Thumbnail Images -->
+        <div class="thumbnails">
+            <% let images = []; %>
+            <% if (pet.profileImage && pet.profileImage.url) { %>
+                <% images.push({ url: pet.profileImage.url, alt: 'Profile Image' }); %>
+            <% } %>
+            <% pet.images.forEach(image => { %>
+                <% images.push({ url: image.url, alt: 'Pet Image' }); %>
+            <% }); %>
+
+            <% images.forEach((image, index) => { %>
+                <img 
+                    class="thumbnail <%= index === 0 ? 'active' : '' %>" 
+                    src="<%= image.url %>" 
+                    alt="<%= image.alt %>" 
+                    data-index="<%= index %>">
+            <% }); %>
+        </div>
+
+        <!-- Main Image Display -->
+        <div class="main-image">
+            <img id="current-image" src="<%= images.length > 0 ? images[0].url : '/images/default-placeholder.png' %>" alt="Main Image">
+        </div>
+    </div>
+
+    <!-- Contact Owner Button -->
+    <a href="/contact/<%= pet._id %>">
+        <button>Contact Owner</button>
+    </a>
     <a href="/">Back to List</a>
+
+    <!-- JavaScript to handle image switching -->
+    <script>
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const currentImage = document.getElementById('current-image');
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', function() {
+                // Remove 'active' class from all thumbnails
+                thumbnails.forEach(tn => tn.classList.remove('active'));
+                // Add 'active' class to clicked thumbnail
+                this.classList.add('active');
+                // Update the main image
+                currentImage.src = this.src;
+                currentImage.alt = this.alt;
+            });
+        });
+    </script>
 </body>
 </html>

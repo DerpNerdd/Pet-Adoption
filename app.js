@@ -30,7 +30,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', getAllPets);
 app.use('/pets', petRoutes);
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/contact', contactRoutes);
+app.use('/contact', contactRoutes);
+
 
 // Additional pages
 app.get('/logout', (req, res) => {res.clearCookie('token'); console.log("User logged out"); res.redirect('/');});

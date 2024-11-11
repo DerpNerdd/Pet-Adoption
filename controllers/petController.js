@@ -4,10 +4,26 @@ const { cloudinary } = require('../config/cloudinaryConfig');
 const getAllPets = async (req, res) => {
     try {
         // Extract query parameters
-        const { breed, minAge, maxAge, state, city, sortPrice } = req.query;
+        const { searchTerm, breed, minAge, maxAge, state, city, sortPrice } = req.query;
 
         // Build the query object
         let queryObject = {};
+
+        // Add search functionality
+        if (searchTerm) {
+            // Use a regex to search in multiple fields
+            const searchRegex = new RegExp(searchTerm, 'i'); // Case-insensitive
+
+            queryObject.$or = [
+                { name: searchRegex },
+                { breed: searchRegex },
+                { description: searchRegex },
+                { behavior: searchRegex },
+                { history: searchRegex },
+                { 'location.city': searchRegex },
+                { 'location.state': searchRegex }
+            ];
+        }
 
         // Add breed filter
         if (breed) {
@@ -22,9 +38,11 @@ const getAllPets = async (req, res) => {
         }
 
         // Add location filter
-        if (state || city) {
-            if (state) queryObject['location.state'] = state;
-            if (city) queryObject['location.city'] = { $regex: city, $options: 'i' };
+        if (state) {
+            queryObject['location.state'] = state;
+        }
+        if (city) {
+            queryObject['location.city'] = { $regex: city, $options: 'i' };
         }
 
         // Initialize query
@@ -43,6 +61,7 @@ const getAllPets = async (req, res) => {
         res.render('index', {
             pets,
             user: req.user || null,
+            searchTerm,
             breed,
             minAge,
             maxAge,

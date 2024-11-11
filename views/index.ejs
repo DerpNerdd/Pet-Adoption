@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Existing head content -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Pets for Adoption</title>
@@ -10,8 +11,12 @@
 <body>
     <h1 class="title">Zorro</h1>
 
-    <!-- Filter and Sort Form -->
+    <!-- Filter, Sort, and Search Form -->
     <form action="/" method="GET" id="filterForm">
+        <!-- Search Bar -->
+        <label for="searchTerm">Search:</label>
+        <input type="text" id="searchTerm" name="searchTerm" placeholder="Enter keyword" value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+
         <!-- Breed Filter -->
         <label for="breed">Breed:</label>
         <input type="text" id="breed" name="breed" value="<%= typeof breed !== 'undefined' ? breed : '' %>">
@@ -27,13 +32,56 @@
         <label for="state">State:</label>
         <select id="state" name="state">
             <option value="">All States</option>
-            <!-- Add options for states -->
             <option value="AL" <%= state === 'AL' ? 'selected' : '' %>>Alabama</option>
             <option value="AK" <%= state === 'AK' ? 'selected' : '' %>>Alaska</option>
             <option value="AZ" <%= state === 'AZ' ? 'selected' : '' %>>Arizona</option>
             <option value="AR" <%= state === 'AR' ? 'selected' : '' %>>Arkansas</option>
             <option value="CA" <%= state === 'CA' ? 'selected' : '' %>>California</option>
-            <!-- Add all other states similarly -->
+            <option value="CO" <%= state === 'CO' ? 'selected' : '' %>>Colorado</option>
+            <option value="CT" <%= state === 'CT' ? 'selected' : '' %>>Connecticut</option>
+            <option value="DE" <%= state === 'DE' ? 'selected' : '' %>>Delaware</option>
+            <option value="FL" <%= state === 'FL' ? 'selected' : '' %>>Florida</option>
+            <option value="GA" <%= state === 'GA' ? 'selected' : '' %>>Georgia</option>
+            <option value="HI" <%= state === 'HI' ? 'selected' : '' %>>Hawaii</option>
+            <option value="ID" <%= state === 'ID' ? 'selected' : '' %>>Idaho</option>
+            <option value="IL" <%= state === 'IL' ? 'selected' : '' %>>Illinois</option>
+            <option value="IN" <%= state === 'IN' ? 'selected' : '' %>>Indiana</option>
+            <option value="IA" <%= state === 'IA' ? 'selected' : '' %>>Iowa</option>
+            <option value="KS" <%= state === 'KS' ? 'selected' : '' %>>Kansas</option>
+            <option value="KY" <%= state === 'KY' ? 'selected' : '' %>>Kentucky</option>
+            <option value="LA" <%= state === 'LA' ? 'selected' : '' %>>Louisiana</option>
+            <option value="ME" <%= state === 'ME' ? 'selected' : '' %>>Maine</option>
+            <option value="MD" <%= state === 'MD' ? 'selected' : '' %>>Maryland</option>
+            <option value="MA" <%= state === 'MA' ? 'selected' : '' %>>Massachusetts</option>
+            <option value="MI" <%= state === 'MI' ? 'selected' : '' %>>Michigan</option>
+            <option value="MN" <%= state === 'MN' ? 'selected' : '' %>>Minnesota</option>
+            <option value="MS" <%= state === 'MS' ? 'selected' : '' %>>Mississippi</option>
+            <option value="MO" <%= state === 'MO' ? 'selected' : '' %>>Missouri</option>
+            <option value="MT" <%= state === 'MT' ? 'selected' : '' %>>Montana</option>
+            <option value="NE" <%= state === 'NE' ? 'selected' : '' %>>Nebraska</option>
+            <option value="NV" <%= state === 'NV' ? 'selected' : '' %>>Nevada</option>
+            <option value="NH" <%= state === 'NH' ? 'selected' : '' %>>New Hampshire</option>
+            <option value="NJ" <%= state === 'NJ' ? 'selected' : '' %>>New Jersey</option>
+            <option value="NM" <%= state === 'NM' ? 'selected' : '' %>>New Mexico</option>
+            <option value="NY" <%= state === 'NY' ? 'selected' : '' %>>New York</option>
+            <option value="NC" <%= state === 'NC' ? 'selected' : '' %>>North Carolina</option>
+            <option value="ND" <%= state === 'ND' ? 'selected' : '' %>>North Dakota</option>
+            <option value="OH" <%= state === 'OH' ? 'selected' : '' %>>Ohio</option>
+            <option value="OK" <%= state === 'OK' ? 'selected' : '' %>>Oklahoma</option>
+            <option value="OR" <%= state === 'OR' ? 'selected' : '' %>>Oregon</option>
+            <option value="PA" <%= state === 'PA' ? 'selected' : '' %>>Pennsylvania</option>
+            <option value="RI" <%= state === 'RI' ? 'selected' : '' %>>Rhode Island</option>
+            <option value="SC" <%= state === 'SC' ? 'selected' : '' %>>South Carolina</option>
+            <option value="SD" <%= state === 'SD' ? 'selected' : '' %>>South Dakota</option>
+            <option value="TN" <%= state === 'TN' ? 'selected' : '' %>>Tennessee</option>
+            <option value="TX" <%= state === 'TX' ? 'selected' : '' %>>Texas</option>
+            <option value="UT" <%= state === 'UT' ? 'selected' : '' %>>Utah</option>
+            <option value="VT" <%= state === 'VT' ? 'selected' : '' %>>Vermont</option>
+            <option value="VA" <%= state === 'VA' ? 'selected' : '' %>>Virginia</option>
+            <option value="WA" <%= state === 'WA' ? 'selected' : '' %>>Washington</option>
+            <option value="WV" <%= state === 'WV' ? 'selected' : '' %>>West Virginia</option>
+            <option value="WI" <%= state === 'WI' ? 'selected' : '' %>>Wisconsin</option>
+            <option value="WY" <%= state === 'WY' ? 'selected' : '' %>>Wyoming</option>
         </select>
 
         <label for="city">City:</label>
@@ -63,26 +111,25 @@
 
     <!-- Add a Pet Link -->
     <a href="/create-pet">Add a Pet</a>
-
-    <!-- Pet Listings -->
     <ul>
         <% if (pets && pets.length > 0) { %>
             <% pets.forEach(pet => { %>
                 <li>
                     <a href="/pets/<%= pet._id %>">
-                        <div class="pet-image">
+                        <div class="pet-image img-hover-zoom">
                             <% if (pet.profileImage && pet.profileImage.url) { %>
                                 <img src="<%= pet.profileImage.url %>" alt="<%= pet.name %>">
                             <% } else { %>
                                 <img src="/images/default-placeholder.png" alt="No image available">
                             <% } %>
-                        </div>
-                        <div class="shadow">
-                            <div class="container">
-                                <h2><%= pet.name %></h2>
-                                <p class="age"><%= pet.age %> years</p>
-                                <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
-                                <p class="price">$<%= pet.price %></p>
+                            <!-- Move the shadow div inside pet-image -->
+                            <div class="shadow">
+                                <div class="text-container">
+                                    <h2><%= pet.name %></h2>
+                                    <p class="age"><%= pet.age %> years</p>
+                                    <p class="dot"><ion-icon name="ellipse"></ion-icon></p>
+                                    <p class="price">$<%= pet.price %></p>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -92,15 +139,12 @@
             <p>No pets available for adoption.</p>
         <% } %>
     </ul>
-
-    <!-- Optional JavaScript to reset filters -->
     <script>
         function resetFilters() {
             window.location.href = '/';
         }
     </script>
 
-    <!-- Ionicons Script -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
