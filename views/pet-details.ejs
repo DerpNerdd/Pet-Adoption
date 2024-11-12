@@ -3,22 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title><%= pet.name %> - Pet Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="/pet-details.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1><%= pet.name %></h1>
-    <p>Breed: <%= pet.breed %></p>
-    <p>Age: <%= pet.age %> years</p>
-    <p>Price: $<%= pet.price %></p>
-    <p>Location: State: <%= pet.location.state %>, City: <%= pet.location.city %></p>
-    <p>Description: <%= pet.description %></p>
-    <p>Behavior: <%= pet.behavior %></p>
-    <p>History: <%= pet.history %></p>
-
-    <!-- Image Gallery -->
-    <div class="gallery">
-        <!-- Thumbnail Images -->
-        <div class="thumbnails">
+    <!-- Back Button -->
+    <a href="/" class="back-button">← Back to Home</a>
+    <div class="pet-details-container">
+        <!-- Top Section -->
+        <div class="top-section">
+            <!-- Big Circle Image -->
+            <div class="circle-image">
+                <img id="main-image" src="<%= pet.profileImage && pet.profileImage.url ? pet.profileImage.url : '/images/default-placeholder.png' %>" alt="<%= pet.name %>">
+            </div>
+            <!-- Pet Info -->
+            <div class="pet-info">
+                <h1><%= pet.name %></h1>
+                <div class="pet-meta">
+                    <p><ion-icon name="location-outline"></ion-icon> <%= pet.location.city %>, <%= pet.location.state %></p>
+                    <p><ion-icon name="calendar-outline"></ion-icon> <%= pet.age %> years old</p>
+                </div>
+                <p class="price">$<%= pet.price %></p>
+            </div>
+        </div>
+        <!-- Bottom Section -->
+        <div class="bottom-section">
+            <!-- Seller Info -->
+            <div class="seller-info">
+                <p><strong>Seller Email:</strong></p>
+                <p class="email"><%= pet.ownerEmail %></p>
+                <a href="/contact/<%= pet._id %>">
+                    <button>Contact Seller</button>
+                </a>
+            </div>
+            <!-- Pet Details -->
+            <div class="pet-details">
+                <p><strong>Breed:</strong> <%= pet.breed %></p>
+                <p><strong>Description:</strong> <%= pet.description %></p>
+                <p><strong>Behavior:</strong> <%= pet.behavior %></p>
+                <p><strong>History:</strong> <%= pet.history %></p>
+            </div>
+        </div>
+        <!-- Image Gallery -->
+        <div class="image-gallery">
             <% let images = []; %>
             <% if (pet.profileImage && pet.profileImage.url) { %>
                 <% images.push({ url: pet.profileImage.url, alt: 'Profile Image' }); %>
@@ -26,44 +56,34 @@
             <% pet.images.forEach(image => { %>
                 <% images.push({ url: image.url, alt: 'Pet Image' }); %>
             <% }); %>
-
-            <% images.forEach((image, index) => { %>
-                <img 
-                    class="thumbnail <%= index === 0 ? 'active' : '' %>" 
-                    src="<%= image.url %>" 
-                    alt="<%= image.alt %>" 
-                    data-index="<%= index %>">
-            <% }); %>
-        </div>
-
-        <!-- Main Image Display -->
-        <div class="main-image">
-            <img id="current-image" src="<%= images.length > 0 ? images[0].url : '/images/default-placeholder.png' %>" alt="Main Image">
+            <% if (images.length > 1) { %>
+                <% for (let i = 0; i < images.length; i += 3) { %>
+                    <div class="gallery-row">
+                        <% images.slice(i, i+3).forEach((image, index) => { %>
+                            <img 
+                                class="gallery-image" 
+                                src="<%= image.url %>" 
+                                alt="<%= image.alt %>">
+                        <% }); %>
+                    </div>
+                <% } %>
+            <% } %>
         </div>
     </div>
-
-    <!-- Contact Owner Button -->
-    <a href="/contact/<%= pet._id %>">
-        <button>Contact Owner</button>
-    </a>
-    <a href="/">Back to List</a>
-
     <!-- JavaScript to handle image switching -->
     <script>
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const currentImage = document.getElementById('current-image');
+        const mainImage = document.getElementById('main-image');
+        const galleryImages = document.querySelectorAll('.gallery-image');
 
-        thumbnails.forEach((thumbnail, index) => {
-            thumbnail.addEventListener('click', function() {
-                // Remove 'active' class from all thumbnails
-                thumbnails.forEach(tn => tn.classList.remove('active'));
-                // Add 'active' class to clicked thumbnail
-                this.classList.add('active');
-                // Update the main image
-                currentImage.src = this.src;
-                currentImage.alt = this.alt;
+        galleryImages.forEach((image) => {
+            image.addEventListener('click', function() {
+                mainImage.src = this.src;
+                mainImage.alt = this.alt;
             });
         });
     </script>
+    <!-- Ionicons Script -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

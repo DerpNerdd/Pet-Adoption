@@ -2,25 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <!-- Include CSS stylesheet -->
+    <link rel="stylesheet" href="/auth.css">
+    <!-- Responsive Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form action="/api/v1/users/register" method="POST">
-        <input type="hidden" name="redirectTo" value="<%= redirectTo || '/' %>">
-
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="/login">Login here</a>.</p>
+    <!-- Authentication Container -->
+    <div class="auth-container">
+        <!-- Form Box -->
+        <div class="form-box">
+            <!-- Switch to Login -->
+            <div class="switch-form">
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </div>
+            <h2>Sign Up</h2>
+            <form action="/api/v1/users/register" method="POST">
+                <input type="hidden" name="redirectTo" value="<%= redirectTo || '/' %>">
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <!-- Image Box -->
+        <div class="image-box"></div>
+    </div>
 </body>
 </html>

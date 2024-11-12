@@ -1,0 +1,126 @@
+/* auth.css */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+}
+
+/* Authentication Container */
+.auth-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Form Box */
+.form-box {
+    width: 50%;
+    padding: 60px 40px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.form-box h2 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+}
+
+.input-group input:focus {
+    border-color: #007c34;
+    outline: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #007c34;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #005a26;
+}
+
+/* Switch Form */
+.switch-form {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+.switch-form p {
+    font-size: 16px;
+    color: #555;
+}
+
+.switch-form a {
+    color: #007c34;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+
+/* Image Box */
+.image-box {
+    width: 50%;
+    background-image: url('/background.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+    }
+    .form-box, .image-box {
+        width: 100%;
+    }
+    .switch-form {
+        position: static;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}

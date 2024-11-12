@@ -1,60 +1,288 @@
-.gallery {
+/* Base Styles */
+:root {
+    --primary-green: #007c34;
+    --light-green: #66b2842c;
+    --greeeen: #2ebc6a;
+    --accent-yellow: #fcec94;
+    --dark-gray: #7c7676;
+    --light-gray: #919191;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    /* Updated background with repeating pattern */
+    background: repeating-linear-gradient(
+        135deg,
+        var(--light-green),
+        var(--light-green) 20px,
+        var(--white) 20px,
+        var(--white) 40px
+    );
+    color: var(--white);
+}
+
+/* Back Button */
+.back-button {
+    display: inline-block;
+    margin: 20px 0 0 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--primary-green);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.back-button:hover {
+    color: #005a26;
+}
+
+/* Container */
+.pet-details-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-image: url('/sky.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 15px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: var(--white);
+}
+
+
+
+/* Top Section */
+.top-section {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    margin-top: 20px;
+    align-items: center;
+    position: relative;
 }
 
-/* Thumbnails */
-.thumbnails {
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
+/* Big Circle Image */
+.circle-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 10px solid var(--accent-yellow);
+    flex-shrink: 0;
+    margin-right: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.thumbnail {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border 0.2s;
-}
-
-.thumbnail:hover,
-.thumbnail.active {
-    border: 2px solid #007BFF; /* Highlight color */
-}
-
-/* Main Image */
-.main-image {
-    flex-grow: 1;
-    max-width: 300px;
-}
-
-.main-image img {
+.circle-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    display: block;
+}
+
+/* Pet Info */
+.pet-info {
+    flex: 1;
+}
+
+.pet-info h1 {
+    font-size: 64px;
+    margin-bottom: 20px;
+    font-family: 'Lobster', cursive;
+    color: var(--accent-yellow);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.pet-meta {
+    display: flex;
+    gap: 40px;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.pet-meta p {
+    display: flex;
+    align-items: center;
+}
+
+.pet-meta ion-icon {
+    margin-right: 8px;
+    color: var(--primary-green);
+    font-size: 28px;
+}
+
+.price {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--primary-green);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Bottom Section */
+.bottom-section {
+    display: flex;
+    margin-top: 60px;
+}
+
+/* Seller Info */
+.seller-info {
+    width: 250px;
+    padding: 20px;
+    background-color: var(--greeeen);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.seller-info p {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--accent-yellow);
+}
+
+.seller-info .email {
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--white);
+    word-break: break-all;
+}
+
+.seller-info button {
+    margin-top: 10px;
+    padding: 15px;
+    background: linear-gradient(45deg, var(--primary-green), #00a64d);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--white);
+    transition: background 0.3s;
+}
+
+.seller-info button:hover {
+    background: linear-gradient(45deg, #005a26, var(--primary-green));
+}
+
+/* Pet Details */
+.pet-details {
+    margin-left: 30px;
+    flex: 1;
+}
+
+.pet-details p {
+    font-size: 22px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.pet-details strong {
+    color: var(--accent-yellow);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Image Gallery */
+.image-gallery {
+    margin-top: 50px;
+}
+
+.gallery-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.gallery-image {
+    width: calc(33.333% - 13.333px);
+    height: 250px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: transform 0.3s, opacity 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-image:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+/* Adjusting the container to have space on all sides */
+.pet-details-container {
+    padding: 40px 60px;
+    box-sizing: border-box;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .gallery {
+@media screen and (max-width: 992px) {
+    .pet-details-container {
+        margin: 10px;
+        padding: 30px;
+    }
+    .top-section {
         flex-direction: column;
         align-items: center;
     }
-
-    .thumbnails {
-        flex-direction: row;
+    .circle-image {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
+    .pet-info {
+        margin-left: 0;
+        text-align: center;
+    }
+    .pet-info h1 {
+        font-size: 48px;
+    }
+    .pet-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .price {
+        margin-top: 10px;
+    }
+    .bottom-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .seller-info {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .pet-details {
+        margin-left: 0;
+    }
+    .gallery-image {
+        width: calc(50% - 10px);
+        height: 200px;
+    }
+}
 
-    .thumbnail {
-        margin-right: 10px;
-        margin-bottom: 0;
+@media screen and (max-width: 576px) {
+    .pet-info h1 {
+        font-size: 36px;
+    }
+    .pet-meta {
+        font-size: 20px;
+    }
+    .price {
+        font-size: 28px;
+    }
+    .seller-info p {
+        font-size: 20px;
+    }
+    .seller-info button {
+        font-size: 16px;
+    }
+    .pet-details p {
+        font-size: 18px;
+    }
+    .gallery-image {
+        width: 100%;
+        height: 200px;
     }
 }

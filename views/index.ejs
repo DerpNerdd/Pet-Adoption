@@ -47,6 +47,7 @@
                             <a href="/login" class="nav-button">Login</a>
                         <% } else { %>
                             <a href="/logout" class="nav-button">Logout</a>
+                            <a href="/create-pet" class="nav-button">Add a Pet</a>
                         <% } %>
                     </div>
                 </div>
@@ -81,7 +82,7 @@
             <form action="/" method="GET" id="mobileFilterForm">
                 <!-- Row 1 -->
                 <div class="mobile-row-1">
-                    <button class="hamburger-menu" onclick="toggleMobileMenu()">
+                    <button type="button" class="hamburger-menu" onclick="toggleMobileMenu()">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
                     <a href="/" class="logo">Zorro</a>
@@ -112,6 +113,16 @@
                 </div>
                 <!-- Mobile Menu (Hidden by default) -->
                 <div id="mobileMenu" class="mobile-menu">
+                    <!-- Navigation Links -->
+                    <div class="mobile-nav-links">
+                        <% if (!user) { %>
+                            <a href="/login" class="nav-button">Login</a>
+                        <% } else { %>
+                            <a href="/create-pet" class="nav-button">Add a Pet</a>
+                            <a href="/logout" class="nav-button">Logout</a>
+                        <% } %>
+                    </div>
+                    <!-- Filter Groups -->
                     <div class="filter-group">
                         <label for="breedMobile">Breed:</label>
                         <input type="text" id="breedMobile" name="breed" value="<%= typeof breed !== 'undefined' ? breed : '' %>">
