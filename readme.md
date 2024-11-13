@@ -108,19 +108,7 @@ cd Pet-Adoption
 npm install
 ```
 ### **Environment Variables**
-Create a .env file in the root directory and add the following environment variables:
-
-**env**
-```bash
-MONGOURI="YOUR CONNECTION STRING"
-PORT = "5000"
-JWT_SECRET= "YOUR SECRET PASSWORD"
-CLOUDINARY_CLOUD_NAME="YOUR CLOUDINARY CLOUD NAME"
-CLOUDINARY_API_KEY="YOUR CLOUDINARY API KEY"
-CLOUDINARY_API_KEY_SECRET="YOUR CLOUDINARY API KEY SECRET"
-EMAIL_USERNAME= "THE EMAIL YOU WANT TO SEND EMAILS"
-EMAIL_PASSWORD= "YOUR SPECIAL APP PASSWORD FOR YOUR EMAIL (NOT NORMAL PASSWORD)"
-```
+Create a .env file in the root directory.
 
 ### **Running the Project**
 Start the Server
