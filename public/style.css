@@ -1,4 +1,3 @@
-/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,40 +5,33 @@
     font-family: 'Hind', sans-serif;
 }
 
-/* Colors */
 :root {
-    --primary-green: #007c34; /* A nice dark green */
+    --primary-green: #007c34; 
 }
 
-/* Body */
 body {
     background-color: #f5f5f5;
     color: #333;
 }
 
-/* Import Font */
 @font-face {
     font-family: 'Hind';
     src: url(./fonts/Hind-Regular.ttf) format('truetype');
 }
 
-/* Navigation Bar */
 .navbar {
-    background-color: #fff; /* Removed green background */
+    background-color: #fff;
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* Removed bottom border */
 }
 
-/* Removed separator line */
 .nav-divider {
     display: none;
 }
 
-/* Desktop Navbar */
 .desktop-row {
-    display: none; /* Hidden on mobile */
+    display: none; 
 }
 
 .desktop-row .row-1,
@@ -47,7 +39,6 @@ body {
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    /* Removed background color */
 }
 
 .desktop-row .row-1 .left-section {
@@ -59,7 +50,7 @@ body {
 .desktop-row .logo {
     font-size: 28px;
     font-weight: 700;
-    color: var(--primary-green); /* Green text */
+    color: var(--primary-green); 
     text-decoration: none;
     margin-right: 20px;
 }
@@ -69,11 +60,11 @@ body {
     align-items: center;
     background-color: #f1f1f1;
     padding: 6px 10px;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px; 
     border: 1px solid #ccc;
     margin-right: 20px;
-    width: 100%; /* Make it longer */
-    max-width: 600px; /* Limit the maximum width */
+    width: 100%; 
+    max-width: 600px; 
 }
 
 .desktop-row .search-bar ion-icon {
@@ -99,7 +90,7 @@ body {
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px;
     background-color: #f1f1f1;
     color: #333;
 }
@@ -116,7 +107,7 @@ body {
 .desktop-row .nav-button {
     margin-left: 15px;
     font-size: 16px;
-    color: var(--primary-green); /* Green text */
+    color: var(--primary-green); 
     text-decoration: none;
     font-weight: 500;
 }
@@ -125,16 +116,14 @@ body {
     text-decoration: underline;
 }
 
-/* Desktop Row 2 Filters */
 .desktop-row .row-2 {
-    /* Removed background color and border */
     padding: 10px 15px;
 }
 
 .desktop-row .filter-container {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the content */
+    justify-content: center; 
     flex-wrap: wrap;
 }
 
@@ -150,7 +139,7 @@ body {
     padding: 8px 12px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px; 
     background-color: #f1f1f1;
     color: #333;
 }
@@ -166,7 +155,7 @@ body {
     font-size: 14px;
     cursor: pointer;
     border: none;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px; 
     font-weight: 600;
     background-color: var(--primary-green);
     color: #fff;
@@ -177,9 +166,8 @@ body {
     opacity: 0.9;
 }
 
-/* Mobile Navbar */
 .mobile-row {
-    display: block; /* Visible on mobile */
+    display: block; 
     background-color: var(--primary-green);
 }
 
@@ -234,7 +222,7 @@ body {
     align-items: center;
     background-color: #fff;
     padding: 6px 10px;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px;
     border: 1px solid #ccc;
 }
 
@@ -268,12 +256,11 @@ body {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 25px; /* More rounded */
+    border-radius: 25px; 
     background-color: #fff;
     color: #333;
 }
 
-/* Mobile Menu */
 .mobile-menu {
     display: none;
     background-color: #fff;
@@ -349,13 +336,10 @@ body {
     opacity: 0.9;
 }
 
-/* Responsive Design */
 @media (min-width: 768px) {
-    /* Show desktop navbar */
     .desktop-row {
         display: block;
     }
-    /* Hide mobile navbar */
     .mobile-row {
         display: none;
     }
@@ -364,19 +348,16 @@ body {
     }
 }
 
-/* Pet Listings */
 .pet-listings {
     padding: 30px 10px;
 }
 
-/* Grid layout */
 .pet-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns on mobile */
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
 }
 
-/* Pet Card */
 .pet-card {
     position: relative;
     background-color: #fff;
@@ -389,11 +370,10 @@ body {
     color: inherit;
 }
 
-/* Pet Image Container */
 .pet-image {
     position: relative;
     width: 100%;
-    padding-top: 100%; /* Makes it a square */
+    padding-top: 100%; 
     overflow: hidden;
 }
 
@@ -411,7 +391,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Shadow Overlay */
 .shadow {
     position: absolute;
     bottom: 0;
@@ -428,7 +407,6 @@ body {
     color: #fff;
 }
 
-/* Pet Name, Age, and Price */
 .text-container h2 {
     font-size: 16px;
     margin: 0;
@@ -438,7 +416,6 @@ body {
     font-size: 14px;
 }
 
-/* City and State Below the Card */
 .pet-location {
     margin-top: 5px;
     font-size: 12px;
@@ -446,33 +423,34 @@ body {
     text-align: left;
 }
 
-/* Adjustments for Laptop View */
+.email {
+    font-size: 18px;
+    font-weight: normal;
+    color: white;
+    word-break: break-all;
+}
+
 @media (min-width: 992px) {
-    /* Increase side padding */
     .pet-listings {
         padding: 50px 50px;
     }
 
-    /* Grid layout with 6 columns */
     .pet-grid {
         grid-template-columns: repeat(6, 1fr);
     }
 }
 
-/* Hide elements on mobile */
 @media (max-width: 991px) {
     .text-container,
     .pet-location {
         display: none;
     }
 
-    /* Adjust padding in listings */
     .pet-listings {
         padding: 15px 10px;
     }
 }
 
-/* No Pets Message */
 .no-pets {
     text-align: center;
     font-size: 18px;

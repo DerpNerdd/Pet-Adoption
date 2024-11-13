@@ -1,4 +1,3 @@
-// controllers/contactController.js
 const Pet = require('../models/pet');
 const nodemailer = require('nodemailer');
 
@@ -34,7 +33,6 @@ const sendEmail = async (req, res) => {
         const senderEmail = req.user.email;
         const senderName = req.user.name || 'Interested Adopter';
 
-        // Configure nodemailer with your application's email account
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -43,7 +41,6 @@ const sendEmail = async (req, res) => {
             },
         });
 
-        // Email options
         const mailOptions = {
             from: `"${senderName}" <${process.env.EMAIL_USERNAME}>`,
             replyTo: senderEmail,
@@ -52,12 +49,10 @@ const sendEmail = async (req, res) => {
             text: message,
         };
 
-        // Send the email
         await transporter.sendMail(mailOptions);
 
         console.log('Email sent successfully');
 
-        // Render the success page with redirection
         res.render('email-sent');
     } catch (error) {
         console.error('Error sending email:', error);

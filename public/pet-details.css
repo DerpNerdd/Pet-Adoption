@@ -1,4 +1,3 @@
-/* Base Styles */
 :root {
     --primary-green: #007c34;
     --light-green: #66b2842c;
@@ -13,7 +12,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    /* Updated background with repeating pattern */
     background: repeating-linear-gradient(
         135deg,
         var(--light-green),
@@ -24,7 +22,6 @@ body {
     color: var(--white);
 }
 
-/* Back Button */
 .back-button {
     display: inline-block;
     margin: 20px 0 0 20px;
@@ -39,11 +36,10 @@ body {
     color: #005a26;
 }
 
-/* Container */
 .pet-details-container {
     max-width: 1200px;
     margin: 20px auto;
-    background-image: url('/sky.jpg'); /* Replace with your image path */
+    background-image: url('/sky.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -56,16 +52,12 @@ body {
     color: var(--white);
 }
 
-
-
-/* Top Section */
 .top-section {
     display: flex;
     align-items: center;
     position: relative;
 }
 
-/* Big Circle Image */
 .circle-image {
     width: 300px;
     height: 300px;
@@ -83,7 +75,6 @@ body {
     object-fit: cover;
 }
 
-/* Pet Info */
 .pet-info {
     flex: 1;
 }
@@ -121,13 +112,11 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* Bottom Section */
 .bottom-section {
     display: flex;
     margin-top: 60px;
 }
 
-/* Seller Info */
 .seller-info {
     width: 250px;
     padding: 20px;
@@ -167,7 +156,6 @@ body {
     background: linear-gradient(45deg, #005a26, var(--primary-green));
 }
 
-/* Pet Details */
 .pet-details {
     margin-left: 30px;
     flex: 1;
@@ -185,7 +173,6 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Image Gallery */
 .image-gallery {
     margin-top: 50px;
 }
@@ -211,13 +198,11 @@ body {
     transform: scale(1.05);
 }
 
-/* Adjusting the container to have space on all sides */
 .pet-details-container {
     padding: 40px 60px;
     box-sizing: border-box;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 992px) {
     .pet-details-container {
         margin: 10px;

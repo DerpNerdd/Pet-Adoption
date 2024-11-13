@@ -125,7 +125,7 @@ const createPet = async (req, res) => {
 
 const getPet = async (req, res) => {
     try {
-        const pet = await Pet.findById(req.params.id);
+        const pet = await Pet.findById(req.params.id).populate('owner'); // Populate the owner field
         if (!pet) return res.status(404).send('Pet not found');
         res.render('pet-details', { pet });
     } catch (error) {

@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <title><%= pet.name %> - Pet Details</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="/pet-details.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Back Button -->
     <a href="/" class="back-button">← Back to Home</a>
     <div class="pet-details-container">
-        <!-- Top Section -->
         <div class="top-section">
-            <!-- Big Circle Image -->
             <div class="circle-image">
                 <img id="main-image" src="<%= pet.profileImage && pet.profileImage.url ? pet.profileImage.url : '/images/default-placeholder.png' %>" alt="<%= pet.name %>">
             </div>
-            <!-- Pet Info -->
             <div class="pet-info">
                 <h1><%= pet.name %></h1>
                 <div class="pet-meta">
@@ -29,17 +23,14 @@
                 <p class="price">$<%= pet.price %></p>
             </div>
         </div>
-        <!-- Bottom Section -->
         <div class="bottom-section">
-            <!-- Seller Info -->
-            <div class="seller-info">
-                <p><strong>Seller Email:</strong></p>
-                <p class="email"><%= pet.ownerEmail %></p>
-                <a href="/contact/<%= pet._id %>">
-                    <button>Contact Seller</button>
-                </a>
-            </div>
-            <!-- Pet Details -->
+        <div class="seller-info">
+            <p><strong>Seller Email:</strong></p>
+            <p class="email"><%= pet.owner.email %></p>
+            <a href="/contact/<%= pet._id %>">
+                <button>Contact Seller</button>
+            </a>
+        </div>
             <div class="pet-details">
                 <p><strong>Breed:</strong> <%= pet.breed %></p>
                 <p><strong>Description:</strong> <%= pet.description %></p>
@@ -47,7 +38,6 @@
                 <p><strong>History:</strong> <%= pet.history %></p>
             </div>
         </div>
-        <!-- Image Gallery -->
         <div class="image-gallery">
             <% let images = []; %>
             <% if (pet.profileImage && pet.profileImage.url) { %>
@@ -70,7 +60,6 @@
             <% } %>
         </div>
     </div>
-    <!-- JavaScript to handle image switching -->
     <script>
         const mainImage = document.getElementById('main-image');
         const galleryImages = document.querySelectorAll('.gallery-image');
@@ -82,7 +71,6 @@
             });
         });
     </script>
-    <!-- Ionicons Script -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

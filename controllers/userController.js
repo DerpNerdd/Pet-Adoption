@@ -60,4 +60,13 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser };
+const deleteUser = async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.redirect('/admin');
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting user', error });
+    }
+};
+
+module.exports = { registerUser, loginUser, deleteUser };

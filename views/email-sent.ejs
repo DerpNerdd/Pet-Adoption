@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Message Sent</title>
-    <!-- Add a meta tag for redirection as a fallback -->
+    <link rel="stylesheet" href="/email-sent.css">
     <meta http-equiv="refresh" content="3;url=/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Your message has been sent to the pet owner.</h1>
-    <p>You will be redirected to the home page shortly.</p>
-    <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+    <div class="message-container">
+        <h1>Your message has been sent to the pet owner.</h1>
+        <p>You will be redirected to the home page shortly.</p>
+        <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+    </div>
 
     <script>
         setTimeout(function() {

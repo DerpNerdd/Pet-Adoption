@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -33,6 +32,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/contact', contactRoutes);
 
 
+
 // Additional pages
 app.get('/logout', (req, res) => {res.clearCookie('token'); console.log("User logged out"); res.redirect('/');});
 app.get('/login', (req, res) => res.render('login', { redirectTo: req.query.redirectTo || '/' }));
@@ -46,6 +46,7 @@ app.get('/admin', async (req, res) => {
     const pets = await Pet.find();
     res.render('admin', { users, pets });
 });
+
 
 // Error handling
 app.use(notFound);
