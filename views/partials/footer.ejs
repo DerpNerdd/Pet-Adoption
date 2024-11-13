@@ -1,0 +1,24 @@
+<footer class="footer">
+    <div class="waves">
+      <div class="wave" id="wave1"></div>
+      <div class="wave" id="wave2"></div>
+      <div class="wave" id="wave3"></div>
+      <div class="wave" id="wave4"></div>
+    </div>
+    <ul class="menu">
+      <li class="menu__item"><a class="menu__link" href="/">Home</a></li>
+      <li class="menu__item"><a class="menu__link" href="/create-pet">Create a Pet</a></li>
+        <% if (!user) { %>
+            <li class="menu__item"><a class="menu__link" href="/login">Log in</a></li>
+            <li class="menu__item"><a class="menu__link" href="/signup">Sign up</a></li>
+        <% } else { %>
+            <li class="menu__item"><a class="menu__link" href="/logout">Log out</a></li>
+        <% } %>
+      <li class="menu__item"><a class="menu__link" href="/about-us">About Us</a></li>
+      <li class="menu__item"><a class="menu__link" href="/testimonials">Testimonials</a></li>
+
+
+    </ul>
+    <p>2024 Alan Sanchez | Zorro	&copy; | All Rights Reserved</p>
+  </footer>
+
