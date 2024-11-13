@@ -112,16 +112,14 @@ Create a .env file in the root directory and add the following environment varia
 
 **env**
 ```bash
-PORT=3000
-MONGODB_URI=your_mongodb_connection_string
-SESSION_SECRET=your_session_secret
-EMAIL_USER=your_email@example.com
-EMAIL_PASS=your_email_password
-PORT: The port number on which the server will run.
-MONGODB_URI: Connection string for your MongoDB database.
-SESSION_SECRET: A secret key for session encryption.
-EMAIL_USER: Email address used for sending emails (e.g., Gmail).
-EMAIL_PASS: Password or app-specific password for the email account.
+MONGOURI="YOUR CONNECTION STRING"
+PORT = "5000"
+JWT_SECRET= "YOUR SECRET PASSWORD"
+CLOUDINARY_CLOUD_NAME="YOUR CLOUDINARY CLOUD NAME"
+CLOUDINARY_API_KEY="YOUR CLOUDINARY API KEY"
+CLOUDINARY_API_KEY_SECRET="YOUR CLOUDINARY API KEY SECRET"
+EMAIL_USERNAME= "THE EMAIL YOU WANT TO SEND EMAILS"
+EMAIL_PASSWORD= "YOUR SPECIAL APP PASSWORD FOR YOUR EMAIL (NOT NORMAL PASSWORD)"
 ```
 
 ### **Running the Project**
