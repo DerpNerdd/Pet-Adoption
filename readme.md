@@ -239,6 +239,10 @@ Pet-Adoption/
 ## License
 This project is licensed under the MIT License.
 
+## Planning
+Trello: [Trello](https://trello.com/invite/b/67195d97e06a95b323747ab0/ATTI1e12641cc64b9c7dab5a3801fce70266598CA015/pet-adoption-db)
+Figma Wireframing: [Figma](https://www.figma.com/design/iXSIQilEn9T57x2VdlpduE/Pet-Adoption?node-id=0-1&node-type=canvas&t=gSFFZbK5uOrlOn7m-0)
+
 ## Contact
 For any inquiries or support, please contact:
 
